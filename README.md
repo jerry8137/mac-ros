@@ -19,3 +19,8 @@ The workspace folder that gets created on your machine by `docker-compose` is wh
 
 ## Installing other packages
 Edit the `Dockerfile` line that installs packages and rebuild the container using `docker-compose build`.
+
+## Scripts are added for performing these commands:
+Run `source build.sh` to build image
+Run `source start.sh` to start container
+Run `source enter.sh` to enter container
