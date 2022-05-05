@@ -1,4 +1,5 @@
 FROM osrf/ros:kinetic-desktop-full
+MAINTAINER "Jerry Hou <jerry8137@gmail.com>"
 
 RUN apt-get -y update && apt-get install -y \
     iputils-ping \
