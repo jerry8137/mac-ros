@@ -31,4 +31,5 @@ WORKDIR /root/catkin_ws
 RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
 RUN echo "source /opt/ros/kinetic/setup.sh" >> /root/.bashrc
 RUN echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
+RUN echo "export PS1=\"(container) \$PS1\"" >> /root/.bashrc
 WORKDIR /root/catkin_ws/src
