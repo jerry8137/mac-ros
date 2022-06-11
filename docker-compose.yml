@@ -16,7 +16,8 @@ services:
     env_file:
       - novnc.env
     ports:
-      - "8080:8080"
+      # - "8080:8080"
+      - "5900:5900"
     networks:
       - x11
 networks:
