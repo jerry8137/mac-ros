@@ -11,7 +11,7 @@
 1. Run `docker-compose exec ros bash` (`docker-compose up` has to be running)
 2. Run `cd ~/catkin_ws && catkin_make && source devel/setup.bash`
 3. Run `rosrun rviz rviz`
-4. Open your browser to `localhost:8080/vnc.html` and click connect.
+4. Open VNC viewer, connect to localhost:5900 to view your desktop.
 5. RViz is now running in your browser.
 
 ## Editing your workspace
