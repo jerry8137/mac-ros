@@ -26,3 +26,5 @@ RUN wget \
     && bash Miniconda3-latest-Linux-x86_64.sh -b \
     && rm -f Miniconda3-latest-Linux-x86_64.sh 
 RUN conda --version
+RUN conda create --name pyenv python=3.8
+RUN conda init
