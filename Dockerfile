@@ -13,7 +13,7 @@ RUN apt-get -y update && apt-get install -y \
 # ROS
 RUN mkdir -p /root/catkin_ws/src
 WORKDIR /root/catkin_ws
-RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash"
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash"
 RUN echo "source /opt/ros/noetic/setup.sh" >> /root/.bashrc
 RUN echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
 RUN echo "export PS1=\"(container) \$PS1\"" >> /root/.bashrc
