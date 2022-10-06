@@ -26,7 +26,8 @@ RUN apt-get -y update && apt-get install -y \
     libglu1-mesa-dev \
     freeglut3-dev \
     pip \
-    openssh-server 
+    openssh-server \
+    python3-tk
 
 RUN mkdir -p /root/.ssh
 RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
@@ -41,7 +42,7 @@ RUN echo "export PS1=\"(container) \$PS1\"" >> /root/.bashrc
 WORKDIR /root/catkin_ws/src
 
 RUN export DISPLAY=":0.0"
-RUN pip install numpy
+RUN pip install numpy imageio 
 ENTRYPOINT service ssh restart && bash
 # RUN export ROS_MASTER_URI=http://localhost:11311
 # RUN wget \
