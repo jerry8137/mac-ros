@@ -1,8 +1,8 @@
 FROM osrf/ros:noetic-desktop-full
 MAINTAINER "Jerry Hou <jerry8137@gmail.com>"
 
-ENV PATH="/root/miniconda3/bin:${PATH}"
-ARG PATH="/root/miniconda3/bin:${PATH}"
+# ENV PATH="/root/miniconda3/bin:${PATH}"
+# ARG PATH="/root/miniconda3/bin:${PATH}"
 
 RUN apt-get -y update && apt-get install -y \
     iputils-ping \
