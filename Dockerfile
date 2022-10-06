@@ -35,11 +35,11 @@ RUN sed -ri 's/^#PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN echo "root:root" | chpasswd
 EXPOSE 22 
 # ROS
-RUN mkdir -p /root/catkin_ws/src
+# RUN mkdir -p /root/catkin_ws/src
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash"
 RUN echo "source /opt/ros/noetic/setup.sh" >> /root/.bashrc
 RUN echo "export PS1=\"(container) \$PS1\"" >> /root/.bashrc
-WORKDIR /root/catkin_ws/src
+WORKDIR /root/
 
 RUN export DISPLAY=":0.0"
 RUN pip install numpy imageio 
