@@ -29,21 +29,33 @@ RUN apt-get -y update && apt-get install -y \
     openssh-server \
     python3-tk
 
-RUN mkdir -p /root/.ssh
-RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/^#PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN echo "root:root" | chpasswd
-EXPOSE 22 
-# ROS
-# RUN mkdir -p /root/catkin_ws/src
-RUN /bin/bash -c "source /opt/ros/noetic/setup.bash"
-RUN echo "source /opt/ros/noetic/setup.sh" >> /root/.bashrc
-RUN echo "export PS1=\"(container) \$PS1\"" >> /root/.bashrc
-WORKDIR /root/
-
 RUN export DISPLAY=":0.0"
+ENTRYPOINT sudo service ssh restart && bash
+
+ARG USERNAME=bob
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && apt-get update \
+    && apt-get install -y sudo \
+    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+
+USER $USERNAME
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash"
+RUN echo "source /opt/ros/noetic/setup.sh" >> ~/.bashrc
+RUN echo "export PS1=\"(container) \$PS1\"" >> ~/.bashrc
+
+RUN mkdir -p /home/bob/.ssh
+RUN sudo sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sudo sed -ri 's/^#PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN echo "root:root" | sudo chpasswd
+RUN echo "${USER}:passwd" | sudo chpasswd
+EXPOSE 22 
+
 RUN pip install numpy imageio 
-ENTRYPOINT service ssh restart && bash
 # RUN export ROS_MASTER_URI=http://localhost:11311
 # RUN wget \
 #     https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
